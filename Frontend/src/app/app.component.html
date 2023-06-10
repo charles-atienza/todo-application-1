@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col">
+    <div class="row">
+      <label for="robot-name">Robot Name: </label>
+      <input id="robot-name" type="text" [(ngModel)]="newRobotName" placeholder="Enter your robot name.">
+      <button class="ml-1" (click)="$event.stopPropagation(); addNewRobot();" [disabled]="isUpdating">Add Robot</button>
+    </div>
+    <div class="row ml-0">
+      <div class="col">
+        <div class="row m-0">
+          <label for="table-name">Table Name: </label>
+          <input id="table-name" type="text" [(ngModel)]="newTableInfo.name" placeholder="Enter your table name.">
+        </div>
+        <div class="row m-0">
+          <label for="table-xsize">Size of X grid: </label>
+          <input id=table-xsize type="number" [(ngModel)]="newTableInfo.xSize">
+        </div>
+        <div class="row m-0">
+          <label for="table-ysize">Size of Y grid: </label>
+          <input id=table-ysize type="number" [(ngModel)]="newTableInfo.ySize">
+          <button class="ml-1" (click)="$event.stopPropagation(); addNewTable();" [disabled]="isUpdating">Add Table</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <p-dropdown [options]="directionsItemDropdownDto" [(ngModel)]="selectedDirection" optionLabel="name"
+        optionValue="name">
+      </p-dropdown>
+      <button (click)="rotateRobot()" [disabled]="isUpdating">Rotate Robot</button>
+    </div>
+
+    <div class="row">
+      <input type="number" [(ngModel)]="moveCount">
+      <button (click)="moveRobot()" [disabled]="isUpdating">Move</button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <p-dropdown placeholder="Select a table." [options]="tablesItemDropdownDto" [(ngModel)]="selectedTable"
+      optionLabel="name" (onChange)="dropdownOnChange()"></p-dropdown>
+    <button class="btn btn-danger" (click)="deleteTable()" [disabled]="isUpdating">Delete Table</button>
+  </div>
+  <div class="col">
+    <p-dropdown placeholder="Select a robot." [options]="robotItemDropdownDto" [(ngModel)]="selectedRobot"
+      optionLabel="name" (onChange)="dropdownOnChange()"></p-dropdown>
+    <button class="btn btn-danger" (click)="deleteRobot()" [disabled]="isUpdating">Delete Robot</button>
+  </div>
+</div>
+
+
+<div class="row">
+  <button (click)="manuallyRefreshDropdown">
+    Refresh Dropdown
+  </button>
+</div>
+<div class="row ml-2">
+  <p>{{tableInfo}}</p>
+</div>
+<div class="row ml-2">
+  <p>{{message}}</p>
+</div>

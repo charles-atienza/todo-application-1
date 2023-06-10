@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Exam</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="11.5.0" />
+        <PackageReference Include="MediatR" Version="11.1.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+        <PackageReference Include="Riok.Mapperly" Version="2.7.0" />
+        <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.25" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Exam.Application.Shared\Exam.Application.Shared.csproj" />
+        <ProjectReference Include="..\Exam.Core\Exam.Core.csproj" />
+        <ProjectReference Include="..\Exam.EntityFrameworkCore\Exam.EntityFrameworkCore.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Services" />
+      <Folder Include="WeatherSummariesModule" />
+    </ItemGroup>
+
+</Project>
