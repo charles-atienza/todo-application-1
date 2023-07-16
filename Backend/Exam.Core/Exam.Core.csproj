@@ -30,4 +30,8 @@
         <ProjectReference Include="..\Exam.Extensions\Exam.Extensions.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DbContexts\Seed\" />
+    </ItemGroup>
+
 </Project>

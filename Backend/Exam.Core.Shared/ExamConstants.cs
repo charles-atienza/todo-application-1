@@ -6,7 +6,7 @@
 public class ExamConstants
 {
     public const string ConnectionStringName = "Default";
-    public const string DefaultSchemaName = "web";
+    public const string DefaultSchemaName = "main";
 
     /// <summary>
     ///     Configurations for the application. This config can be a table in the database with TenantId
@@ -17,13 +17,5 @@ public class ExamConstants
         public const bool IsSoftDelete = true;
         public const bool IsOverwriteSoftDeletedOnAdd = true;
         public const bool IsIncludeSoftDeletedOnGet = false;
-    }
-
-    /// <summary>
-    ///     Anything that is a configuration for the Entity
-    /// </summary>
-    public class Entity
-    {
-        public const string DefaultRobotDirection = "East";
     }
 }

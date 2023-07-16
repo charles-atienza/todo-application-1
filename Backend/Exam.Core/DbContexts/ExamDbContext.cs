@@ -9,6 +9,8 @@ namespace Exam.DbContexts;
 /// </summary>
 public class ExamDbContext : BaseDbContext
 {
+    public virtual DbSet<Tasks> Tasks { get; set; }
+
     /// <summary>
     ///     Constructor
     /// </summary>

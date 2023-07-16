@@ -1,10 +1,10 @@
-﻿using System.Collections.Concurrent;
-using System.Linq.Expressions;
-using Exam.DbContexts.Interface;
+﻿using Exam.DbContexts.Interface;
 using Exam.Entities.Complementary.Interface;
 using Exam.Extensions;
 using Exam.Helper;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Concurrent;
+using System.Linq.Expressions;
 
 namespace Exam.Repositories.Base;
 
@@ -90,6 +90,15 @@ public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IReposi
     {
         _ = GetTable().Add(entity).Entity;
         return await Task.FromResult(entity).ConfigureAwait(false);
+    }
+
+    public virtual async Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity)
+    {
+        var result = GetTable().Add(entity);
+
+        await GetContext().SaveChangesAsync().ConfigureAwait(false); // Save changes to the database
+
+        return await Task.FromResult(result.Entity.Id).ConfigureAwait(false);
     }
 
     public virtual TEntity Update(TEntity entity)

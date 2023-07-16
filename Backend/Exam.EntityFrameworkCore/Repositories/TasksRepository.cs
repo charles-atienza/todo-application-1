@@ -7,9 +7,9 @@ using Exam.Repositories.Base;
 namespace Exam.EntityFrameworkCore.Repositories;
 
 /// <summary>
-///     Allianz Entity repository
+///     Entity repository
 /// </summary>
-public class WeatherSummariesRepository : ExamRepositoryBase<WeatherSummaries>, IWeatherSummariesRepository
+public class TasksRepository : ExamRepositoryBase<Tasks>, ITasksRepository
 {
     private readonly ExamDbContext _dbContext;
 
@@ -17,7 +17,7 @@ public class WeatherSummariesRepository : ExamRepositoryBase<WeatherSummaries>, 
     ///     Constructor
     /// </summary>
     /// <param name="dbContextProvider"></param>
-    public WeatherSummariesRepository(IDbContextProvider<ExamDbContext> dbContextProvider)
+    public TasksRepository(IDbContextProvider<ExamDbContext> dbContextProvider)
         : base(dbContextProvider)
     {
         _dbContext = dbContextProvider.GetDbContext();
