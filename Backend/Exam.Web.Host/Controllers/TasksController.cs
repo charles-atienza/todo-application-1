@@ -44,7 +44,7 @@ public class TasksController : ExamControllerBase
     /// <summary>Deletes the task.</summary>
     /// <param name="id">The identifier.</param>
     /// <see cref="DeleteTaskCommandHandler" />
-    [HttpGet]
+    [HttpDelete("{id}")]
     public async Task<bool> DeleteTask([FromRoute] int id)
     {
         return await _mediator.Send(new DeleteTaskCommand() { Id = id });
@@ -53,7 +53,7 @@ public class TasksController : ExamControllerBase
     /// <summary>Sets the task as completed.</summary>
     /// <param name="id">The identifier.</param>
     /// <see cref="SetTaskAsCompletedCommandHandler" />
-    [HttpPut]
+    [HttpPost("{id}")]
     public async Task<TasksDto> SetTaskAsCompleted([FromRoute] int id)
     {
         return await _mediator.Send(new SetTaskAsCompletedCommand() { Id = id });
