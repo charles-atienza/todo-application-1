@@ -1,5 +1,4 @@
 ﻿using Exam.Entities.Interface;
-using Exam.Mappers.Interface;
 using Exam.Todo.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,6 @@ namespace Exam.Todo.Handlers;
 /// </summary>
 public class DeleteTaskCommandHandler : IRequestHandler<DeleteTaskCommand, bool>
 {
-    private readonly ITasksMapper _tasksMapper;
     private readonly ITasksRepository _tasksRepository;
 
     /// <summary>
@@ -20,11 +18,9 @@ public class DeleteTaskCommandHandler : IRequestHandler<DeleteTaskCommand, bool>
     /// <param name="tasksMapper"></param>
     /// <param name="tasksRepository"></param>
     public DeleteTaskCommandHandler(
-        ITasksMapper tasksMapper,
         ITasksRepository tasksRepository
     )
     {
-        _tasksMapper = tasksMapper;
         _tasksRepository = tasksRepository;
     }
 

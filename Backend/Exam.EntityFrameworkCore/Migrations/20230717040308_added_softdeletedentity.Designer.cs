@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exam.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(ExamDbContext))]
-    [Migration("20230611165400_AddedTasksRepositoryAndRemovedTemplateRepo")]
-    partial class AddedTasksRepositoryAndRemovedTemplateRepo
+    [Migration("20230717040308_added_softdeletedentity")]
+    partial class addedsoftdeletedentity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace Exam.EntityFrameworkCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");

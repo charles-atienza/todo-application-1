@@ -1,10 +1,11 @@
-﻿using System.Reflection;
-using Exam.Repositories;
-using Exam.Configuration;
-using Exam.DbContexts;
-using Exam.DbContexts.Interface;
+﻿using Exam.Database.DbContexts;
+using Exam.Database.DbContexts.Interface;
+using Exam.Database.Repositories.Interface;
 using Exam.Extensions;
 using Exam.Mappers;
+using Exam.Web.Utilities.Filter;
+using Exam.Web.Utilities.Middleware;
+using Exam.Web.Utilities.Swagger;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.JsonMultipartFormDataSupport.Extensions;
 using Swashbuckle.AspNetCore.JsonMultipartFormDataSupport.Integrations;
-using Exam.Web.Utilities.Swagger;
-using Exam.Web.Utilities.Middleware;
-using Exam.Web.Utilities.Filter;
+using System.Reflection;
 
 namespace Exam.Web.Startup;
 
@@ -37,7 +36,7 @@ public class Startup
 
     private void ConfigureServices(IServiceCollection services, IConfigurationRoot appConfiguration)
     {
-        var assemblies = AppDomain.CurrentDomain.Load("Exam.Application");
+        var assemblies = AppDomain.CurrentDomain.Load("Exam.BusinessLogic");
 
         //MVC
         services.AddMvc(options =>
@@ -91,7 +90,7 @@ public class Startup
         });
 
         if (appConfiguration.GetValue<bool>("Swagger:IsUiEnabled"))
-            //Swagger - Enable this line and the related lines in Configure method to enable swagger 
+        //Swagger - Enable this line and the related lines in Configure method to enable swagger 
         {
             ConfigureSwagger(services);
         }
@@ -176,7 +175,7 @@ public class Startup
     /// <param name="services"></param>
     private void ConfigureMapperlyService(IServiceCollection services)
     {
-        var repositoryAssembly = AppDomain.CurrentDomain.Load("Exam.Application");
+        var repositoryAssembly = AppDomain.CurrentDomain.Load("Exam.BusinessLogic");
         var mappersList =
             repositoryAssembly.GetTypes()
                 .Where(t => t.IsClass && t.GetInterfaces()
