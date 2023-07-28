@@ -1,4 +1,4 @@
-﻿using Exam.Entities.Complementary.Interface;
+﻿using Exam.Database.Complementary.Interface;
 
 namespace Exam.Database.Repositories.Interface;
 
@@ -8,10 +8,10 @@ public interface IRepository<TEntity, TPrimaryKey>
     IQueryable<TEntity> GetAll();
     Task<IQueryable<TEntity>> GetAllAsync();
     Task<TEntity?> GetAsync(TPrimaryKey id);
-    Task<TEntity> InsertAsync(TEntity entity);
-    Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity);
-    Task<TEntity> UpdateAsync(TEntity entity);
-    Task DeleteAsync(TEntity entity);
+    Task<TEntity> InsertAsync(TEntity entity, long? addedByUserId = null);
+    Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity, long? addedByUserId = null);
+    Task<TEntity> UpdateAsync(TEntity entity, long? updatedByUserId = null);
+    Task DeleteAsync(TEntity entity, long? deletedByUserId = null);
     Task<int> SaveChangesAsync();
 }
 

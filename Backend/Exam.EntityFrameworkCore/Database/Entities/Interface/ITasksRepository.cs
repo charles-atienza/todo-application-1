@@ -1,7 +1,7 @@
-using Exam.Entities.Base;
+using Exam.Database.Base;
 using Exam.Database.Repositories.Interface;
 
-namespace Exam.Entities.Interface;
+namespace Exam.Database.Interface;
 
 /// <summary>
 ///     Weather Summaries Entity repository

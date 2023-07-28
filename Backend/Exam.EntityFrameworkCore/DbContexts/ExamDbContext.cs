@@ -1,5 +1,5 @@
 ﻿using Exam.Database.DbContexts.Abstract;
-using Exam.Entities.Base;
+using Exam.Database.Base;
 using Microsoft.EntityFrameworkCore;
 #pragma warning disable CS8618
 

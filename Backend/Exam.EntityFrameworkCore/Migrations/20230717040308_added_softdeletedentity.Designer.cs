@@ -25,7 +25,7 @@ namespace Exam.EntityFrameworkCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Exam.Entities.Base.Tasks", b =>
+            modelBuilder.Entity("Exam.Database.Base.Tasks", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

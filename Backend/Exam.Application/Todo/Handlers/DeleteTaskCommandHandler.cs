@@ -1,4 +1,4 @@
-﻿using Exam.Entities.Interface;
+﻿using Exam.Database.Interface;
 using Exam.Todo.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

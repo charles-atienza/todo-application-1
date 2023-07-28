@@ -1,7 +1,7 @@
 using Exam.Database.DbContexts;
 using Exam.Database.DbContexts.Interface;
-using Exam.Entities.Base;
-using Exam.Entities.Interface;
+using Exam.Database.Base;
+using Exam.Database.Interface;
 using Exam.Database.Repositories.Abstract;
 
 namespace Exam.EntityFrameworkCore.Repositories;

@@ -35,7 +35,6 @@
     <ItemGroup>
         <ProjectReference Include="..\Exam.Application\Exam.BusinessLogic.csproj" />
         <ProjectReference Include="..\Exam.Core\Exam.Core.csproj" />
-        <ProjectReference Include="..\Exam.EntityFrameworkCore\Exam.EntityFrameworkCore.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Exam.Database.DbContexts;
 using Exam.Database.DbContexts.Interface;
-using Exam.Entities.Complementary.Interface;
+using Exam.Database.Complementary.Interface;
 
 namespace Exam.Database.Repositories.Abstract;
 

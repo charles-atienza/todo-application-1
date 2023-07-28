@@ -1,4 +1,4 @@
-﻿namespace Exam.Entities.Complementary.Interface;
+﻿namespace Exam.Database.Complementary.Interface;
 
 public interface IEntity<TPrimaryKey>
 {

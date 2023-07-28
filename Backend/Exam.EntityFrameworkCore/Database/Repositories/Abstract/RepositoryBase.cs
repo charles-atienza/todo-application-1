@@ -1,7 +1,7 @@
-﻿using Exam.Database.DbContexts.Interface;
-using Exam.Database.Entities.Complementary;
+﻿using Exam.Database.Complementary;
+using Exam.Database.Complementary.Interface;
+using Exam.Database.DbContexts.Interface;
 using Exam.Database.Repositories.Interface;
-using Exam.Entities.Complementary.Interface;
 using Exam.Extensions;
 using Exam.Utilities;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +41,7 @@ public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IReposi
     /// <returns></returns>
     public virtual async Task<TEntity?> GetAsync(TPrimaryKey id)
     {
-        return await FirstOrDefaultAsync(id).ConfigureAwait(false);
+        return await GetAll().FirstOrDefaultAsync(CreateEqualityExpressionForId(id)).ConfigureAwait(false);
     }
 
     public virtual IQueryable<TEntity> GetAll()
@@ -76,26 +76,31 @@ public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IReposi
     /// <param name="entity"></param>
     /// <typeparam name="T"></typeparam>
 
-    public virtual Task DeleteAsync(TEntity entity)
+    public virtual Task DeleteAsync(TEntity entity, long? userId = null)
     {
-        Delete(entity);
+        Delete(entity, userId);
         return Task.CompletedTask;
     }
 
-    public virtual Task<TEntity?> FirstOrDefaultAsync(TPrimaryKey id)
+    public virtual async Task<TEntity> InsertAsync(TEntity entity, long? userId = null)
     {
-        var query = GetAll().FirstOrDefault(CreateEqualityExpressionForId(id)) ?? null;
-        return Task.FromResult(query);
-    }
-
-    public virtual async Task<TEntity> InsertAsync(TEntity entity)
-    {
+        if (entity is IAuditedEntity<TPrimaryKey> auditedEntity)
+        {
+            auditedEntity.AddedByUserId = userId ?? 0;
+            auditedEntity.AddedDate = DateTime.Now;
+        }
         _ = GetTable().Add(entity).Entity;
         return await Task.FromResult(entity).ConfigureAwait(false);
     }
 
-    public virtual async Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity)
+    public virtual async Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity, long? userId = null)
     {
+        if (entity is IAuditedEntity<TPrimaryKey> auditedEntity)
+        {
+            auditedEntity.AddedByUserId = userId ?? 0;
+            auditedEntity.AddedDate = DateTime.Now;
+        }
+
         var result = GetTable().Add(entity);
 
         await GetContext().SaveChangesAsync().ConfigureAwait(false); // Save changes to the database
@@ -103,16 +108,21 @@ public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IReposi
         return await Task.FromResult(result.Entity.Id).ConfigureAwait(false);
     }
 
-    public virtual TEntity Update(TEntity entity)
+    public virtual TEntity Update(TEntity entity, long? userId = null)
     {
         AttachIfNot(entity);
+        if (entity is IAuditedEntity<TPrimaryKey> auditedEntity)
+        {
+            auditedEntity.ModifiedByUserId = userId ?? 0;
+            auditedEntity.ModifiedDate = DateTime.Now;
+        }
         GetContext().Entry(entity).State = EntityState.Modified;
         return entity;
     }
 
-    public virtual Task<TEntity> UpdateAsync(TEntity entity)
+    public virtual Task<TEntity> UpdateAsync(TEntity entity, long? userId = null)
     {
-        entity = Update(entity);
+        entity = Update(entity, userId);
         return Task.FromResult(entity);
     }
 
@@ -173,13 +183,18 @@ public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IReposi
         return GetContext().Set<TEntity>();
     }
 
-    protected virtual void Delete(TEntity entity)
+    protected virtual void Delete(TEntity entity, long? deletedByUserId = null)
     {
         AttachIfNot(entity);
-        if (entity is SoftDeletedEntity<TPrimaryKey> softDeleteEntity)
+        if (entity is ISoftDeletedEntity<TPrimaryKey> softDeletedEntity)
         {
-            softDeleteEntity.IsActive = false;
+            softDeletedEntity.IsActive = false;
             return;
+        }
+        if (entity is IAuditedEntity<TPrimaryKey> obj)
+        {
+            obj.ModifiedByUserId = deletedByUserId;
+            obj.ModifiedDate = DateTime.Now;
         }
 
         GetTable().Remove(entity);

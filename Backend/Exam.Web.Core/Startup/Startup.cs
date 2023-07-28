@@ -43,7 +43,6 @@ public class Startup
         {
             options.Filters.Add<LoggerContextAttribute>();
             options.Filters.Add<AppExceptionFilterAttribute>();
-            options.Filters.Add<GenericResponseResultFilter>();
         });
         ConfigureDbContextService(services);
 
@@ -195,7 +194,7 @@ public class Startup
 
     private void ConfigureRepositoryService(IServiceCollection services)
     {
-        var repositoryAssembly = AppDomain.CurrentDomain.Load("Exam.EntityFrameworkCore");
+        var repositoryAssembly = AppDomain.CurrentDomain.Load("Exam.Database");
         var repositoryTypes = repositoryAssembly
             .GetTypes()
             .Where(t => t.IsClass && t.GetInterfaces()

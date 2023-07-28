@@ -1,4 +1,4 @@
-using Exam.Entities.Base;
+using Exam.Database.Base;
 using Exam.Todo.Queries;
 
 namespace Exam.Mappers.Interface;

@@ -1,4 +1,4 @@
-using Exam.Entities.Base;
+﻿using Exam.Database.Base;
 using Exam.Mappers.Interface;
 using Exam.Todo.Queries;
 using Riok.Mapperly.Abstractions;

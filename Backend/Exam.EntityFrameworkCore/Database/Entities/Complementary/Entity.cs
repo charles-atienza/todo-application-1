@@ -1,13 +1,20 @@
 ﻿#nullable disable
-using Exam.Entities.Complementary.Interface;
+using Exam.Database.Complementary.Interface;
 
-namespace Exam.Entities.Complementary;
+namespace Exam.Database.Complementary;
 
 [Serializable]
-public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>
+public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>, IAuditedEntity<TPrimaryKey>, ISoftDeletedEntity<TPrimaryKey>
 {
     /// <summary>
     ///     Unique identifier for this entity.
     /// </summary>
     public virtual TPrimaryKey Id { get; set; }
+
+    public long AddedByUserId { get; set; }
+    public DateTime AddedDate { get; set; }
+    public long? ModifiedByUserId { get; set; }
+    public DateTime? ModifiedDate { get; set; }
+
+    public bool IsActive { get; set; }
 }

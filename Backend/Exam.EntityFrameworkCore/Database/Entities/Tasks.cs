@@ -3,7 +3,7 @@ using Exam.Database.Entities.Complementary;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace Exam.Entities.Base;
+namespace Exam.Database.Base;
 
 [Index(nameof(Name), IsUnique = true)]
 public class Tasks : SoftDeletedEntity<int>

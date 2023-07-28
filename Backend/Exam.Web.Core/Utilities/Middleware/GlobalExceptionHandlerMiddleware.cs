@@ -1,8 +1,7 @@
-﻿using Exam.Web.Utilities.Common;
-using FluentValidation;
+﻿using Exam.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net;
 
 namespace Exam.Web.Utilities.Middleware;
 
@@ -53,43 +52,27 @@ public class GlobalExceptionHandlerMiddleware
     {
         httpContext.Response.Clear();
         httpContext.Response.ContentType = "application/json";
-        var response = new GenericResponse<string>();
-        if (exception is ValidationException validationException)
+
+        int statusCode;
+        string errorMessage;
+
+        if (exception is UserFriendlyException userFriendlyException)
         {
-            httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            var message = string.Join(", ", validationException.Errors.Select(x => x.ErrorMessage).ToArray());
-            response = new GenericResponse<string>
-            {
-                Error = new GenericError
-                {
-                    Code = (int)HttpStatusCode.BadRequest,
-                    Message = message ?? string.Empty,
-                    Details = validationException.Message,
-                    ValidationErrors = validationException?.Errors?.ToList()
-                },
-                Success = false
-            };
+            statusCode = userFriendlyException.StatusCode;
+            errorMessage = userFriendlyException.Message;
         }
         else
         {
-            var isArgumentException = exception is ArgumentException;
-            var message = "An error occurred while processing your request.";
-            var statusCode =
-                (int)(isArgumentException ? HttpStatusCode.BadRequest : HttpStatusCode.InternalServerError);
-            var details = isArgumentException ? exception.Message : string.Empty;
-
-            httpContext.Response.StatusCode = statusCode;
-            response = new GenericResponse<string>
-            {
-                Error = new GenericError
-                {
-                    Code = statusCode,
-                    Message = message,
-                    Details = details
-                },
-                Success = false
-            };
+            statusCode = 500;
+            errorMessage = "An unhandled error occurred, please wait or contact an Admin.";
         }
+
+        httpContext.Response.StatusCode = statusCode;
+
+        var response = new ObjectResult(errorMessage)
+        {
+            StatusCode = statusCode
+        };
 
         var jsonResponse = JsonConvert.SerializeObject(response);
         await httpContext.Response.WriteAsync(jsonResponse);
