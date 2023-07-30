@@ -1,8 +1,8 @@
-﻿namespace Exam.Extensions
+﻿namespace Exam.Utilities
 {
     public class UserFriendlyException : Exception
     {
-        public int StatusCode { get; init; } = 400;
+        public int StatusCode { get; init; } = 428;
         protected string UserFriendlyMessage { get; }
 
         public UserFriendlyException(int statusCode, string message) : base(message)

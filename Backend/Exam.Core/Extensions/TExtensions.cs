@@ -1,6 +1,6 @@
 ﻿namespace Exam.Extensions;
 
-public static class ICollectionTExtension
+public static class CollectionTExtension
 {
     /// <summary>
     ///     A cleaner way to check if ICollection<T> is null or empty.

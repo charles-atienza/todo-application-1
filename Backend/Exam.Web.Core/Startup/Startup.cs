@@ -3,6 +3,7 @@ using Exam.Database.DbContexts.Interface;
 using Exam.Database.Repositories.Interface;
 using Exam.Extensions;
 using Exam.Mappers;
+using Exam.Utilities.Configuration;
 using Exam.Web.Utilities.Filter;
 using Exam.Web.Utilities.Middleware;
 using Exam.Web.Utilities.Swagger;
@@ -24,7 +25,7 @@ public class Startup
 
     public Startup(IWebHostEnvironment env)
     {
-        AppConfiguration = env.GetAppConfiguration();
+        AppConfiguration = AppplicationConfigurations.Get(env.ContentRootPath, env.EnvironmentName, env.IsDevelopment());
     }
 
     private IConfigurationRoot AppConfiguration { get; }
