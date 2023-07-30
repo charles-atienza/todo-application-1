@@ -157,7 +157,7 @@ public class Startup
         {
             options.UseSqlServer(
                 AppConfiguration.GetConnectionString(ExamConstants.ConnectionStringName),
-                x => x.MigrationsAssembly("Exam.EntityFrameworkCore")
+                x => x.MigrationsAssembly("Exam.Database")
             );
 
             if (AppConfiguration.GetValue<bool>("App:DbEnableSensitiveDataLogging"))

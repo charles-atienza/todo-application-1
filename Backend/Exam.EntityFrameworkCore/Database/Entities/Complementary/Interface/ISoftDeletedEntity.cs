@@ -1,4 +1,4 @@
-﻿namespace Exam.Database.Complementary.Interface
+﻿namespace Exam.Database.Entities.Complementary.Interface
 {
     public interface ISoftDeletedEntity<TPrimaryKey> : IEntity<TPrimaryKey>
     {

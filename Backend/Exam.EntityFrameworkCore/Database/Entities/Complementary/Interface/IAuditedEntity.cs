@@ -1,6 +1,6 @@
-﻿using Exam.Database.Complementary.Interface;
+﻿using Exam.Database.Entities.Complementary.Interface;
 
-namespace Exam.Database.Complementary;
+namespace Exam.Database.Entities.Complementary;
 
 public interface IAuditedEntity<TPrimaryKey> : IEntity<TPrimaryKey>
 {

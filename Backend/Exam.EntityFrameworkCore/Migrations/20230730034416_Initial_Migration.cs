@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Exam.EntityFrameworkCore.Migrations
+namespace Exam.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedTasksRepositoryAndRemovedTemplateRepo : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,14 +15,19 @@ namespace Exam.EntityFrameworkCore.Migrations
                 name: "main");
 
             migrationBuilder.CreateTable(
-                name: "Task",
+                name: "Tasks",
                 schema: "main",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IsCompleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsCompleted = table.Column<bool>(type: "bit", nullable: false),
+                    AddedByUserId = table.Column<long>(type: "bigint", nullable: false),
+                    AddedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedByUserId = table.Column<long>(type: "bigint", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,7 +37,7 @@ namespace Exam.EntityFrameworkCore.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_Name",
                 schema: "main",
-                table: "Task",
+                table: "Tasks",
                 column: "Name",
                 unique: true);
         }
@@ -40,7 +46,7 @@ namespace Exam.EntityFrameworkCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Task",
+                name: "Tasks",
                 schema: "main");
         }
     }

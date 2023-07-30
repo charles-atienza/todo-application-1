@@ -1,6 +1,6 @@
-﻿using Exam.Database.Complementary;
-using Exam.Database.Complementary.Interface;
-using Exam.Database.DbContexts.Interface;
+﻿using Exam.Database.DbContexts.Interface;
+using Exam.Database.Entities.Complementary;
+using Exam.Database.Entities.Complementary.Interface;
 using Exam.Database.Repositories.Interface;
 using Exam.Extensions;
 using Exam.Utilities;

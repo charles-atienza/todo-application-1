@@ -1,4 +1,4 @@
-﻿using Exam.Database.Complementary.Interface;
+﻿using Exam.Database.Entities.Complementary.Interface;
 
 namespace Exam.Database.Repositories.Interface;
 

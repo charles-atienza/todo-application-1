@@ -22,7 +22,7 @@ public class Program
             .ConfigureLogging((context, logging) =>
             {
                 var logLevel = context.HostingEnvironment.IsDevelopment() ? LogLevel.Debug : LogLevel.Warning;
-                logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", logLevel);
+                logging.AddFilter("Microsoft.Database.Database.Command", logLevel);
             })
             .UseDefaultServiceProvider(options => options.ValidateScopes = false)
             .UseIIS()

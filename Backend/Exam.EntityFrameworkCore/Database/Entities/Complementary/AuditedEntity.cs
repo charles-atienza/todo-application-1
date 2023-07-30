@@ -1,5 +1,6 @@
 ﻿#nullable disable
 
+using Exam.Database.Entities.Complementary;
 using System.ComponentModel.DataAnnotations;
 
 namespace Exam.Database.Complementary;
