@@ -14,7 +14,7 @@ namespace Exam.EntityFrameworkCore.Migrations
                 name: "main");
 
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "Task",
                 schema: "main",
                 columns: table => new
                 {
@@ -31,7 +31,7 @@ namespace Exam.EntityFrameworkCore.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_Name",
                 schema: "main",
-                table: "Tasks",
+                table: "Task",
                 column: "Name",
                 unique: true);
         }
@@ -40,7 +40,7 @@ namespace Exam.EntityFrameworkCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tasks",
+                name: "Task",
                 schema: "main");
         }
     }

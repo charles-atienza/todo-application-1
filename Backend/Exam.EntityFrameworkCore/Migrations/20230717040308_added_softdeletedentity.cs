@@ -13,7 +13,7 @@ namespace Exam.EntityFrameworkCore.Migrations
             migrationBuilder.AddColumn<bool>(
                 name: "IsActive",
                 schema: "main",
-                table: "Tasks",
+                table: "Task",
                 type: "bit",
                 nullable: false,
                 defaultValue: false);
@@ -25,7 +25,7 @@ namespace Exam.EntityFrameworkCore.Migrations
             migrationBuilder.DropColumn(
                 name: "IsActive",
                 schema: "main",
-                table: "Tasks");
+                table: "Task");
         }
     }
 }

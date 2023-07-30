@@ -25,7 +25,7 @@ namespace Exam.EntityFrameworkCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Exam.Database.Base.Tasks", b =>
+            modelBuilder.Entity("Exam.Database.Base.Task", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace Exam.EntityFrameworkCore.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Tasks", "main");
+                    b.ToTable("Task", "main");
                 });
 #pragma warning restore 612, 618
         }

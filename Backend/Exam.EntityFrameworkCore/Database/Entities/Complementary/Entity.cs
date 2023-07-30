@@ -1,7 +1,7 @@
 ﻿#nullable disable
 using Exam.Database.Complementary.Interface;
 
-namespace Exam.Database.Complementary;
+namespace Exam.Database.Entities.Complementary;
 
 [Serializable]
 public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>, IAuditedEntity<TPrimaryKey>, ISoftDeletedEntity<TPrimaryKey>

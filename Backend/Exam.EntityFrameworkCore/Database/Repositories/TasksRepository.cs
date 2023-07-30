@@ -9,7 +9,7 @@ namespace Exam.EntityFrameworkCore.Repositories;
 /// <summary>
 ///     Entity repository
 /// </summary>
-public class TasksRepository : ExamRepositoryBase<Tasks>, ITasksRepository
+public class TasksRepository : ExamRepositoryBase<Database.Base.Task>, ITasksRepository
 {
     private readonly ExamDbContext _dbContext;
 

@@ -6,6 +6,6 @@ namespace Exam.Database.Interface;
 /// <summary>
 ///     Weather Summaries Entity repository
 /// </summary>
-public interface ITasksRepository : IRepository<Tasks>
+public interface ITasksRepository : IRepository<Base.Task>
 {
 }

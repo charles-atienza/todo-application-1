@@ -1,5 +1,4 @@
-﻿using Exam.Database.Base;
-using Exam.Mappers.Interface;
+﻿using Exam.Mappers.Interface;
 using Exam.Todo.Queries;
 using Riok.Mapperly.Abstractions;
 
@@ -8,7 +7,7 @@ namespace Exam.Mappers.TasksMappers;
 [Mapper]
 public partial class TasksMapper : ITasksMapper
 {
-    public partial Tasks ToTaskEntity(AddTaskCommand addTaskCommand);
-    public partial TasksDto ToTasksDto(Tasks? entity);
-    public partial List<TasksDto> ToTasksDto(IQueryable<Tasks>? entity);
+    public partial Database.Base.Task ToTask(AddTaskCommand addTaskCommand);
+    public partial TasksDto ToTasksDto(Database.Base.Task? entity);
+    public partial List<TasksDto> ToTasksDto(IQueryable<Database.Base.Task>? entity);
 }

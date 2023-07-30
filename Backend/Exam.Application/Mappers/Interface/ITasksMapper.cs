@@ -5,7 +5,7 @@ namespace Exam.Mappers.Interface;
 
 public interface ITasksMapper : IMapper
 {
-    Tasks ToTaskEntity(AddTaskCommand addTaskCommand);
-    TasksDto ToTasksDto(Tasks? entity);
-    List<TasksDto> ToTasksDto(IQueryable<Tasks>? entity);
+    Database.Base.Task ToTask(AddTaskCommand addTaskCommand);
+    TasksDto ToTasksDto(Database.Base.Task? entity);
+    List<TasksDto> ToTasksDto(IQueryable<Database.Base.Task>? entity);
 }

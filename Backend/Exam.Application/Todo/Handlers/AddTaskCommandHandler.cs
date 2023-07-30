@@ -29,7 +29,7 @@ public class AddTaskCommandHandler : IRequestHandler<AddTaskCommand, TasksDto>
 
     public async Task<TasksDto> Handle(AddTaskCommand request, CancellationToken cancellationToken)
     {
-        var newTask = _tasksMapper.ToTaskEntity(request);
+        var newTask = _tasksMapper.ToTask(request);
         var id = await _tasksRepository.InsertAndGetIdAsync(newTask);
 
         if (id == 0)
