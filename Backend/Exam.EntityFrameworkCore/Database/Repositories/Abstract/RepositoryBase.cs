@@ -93,6 +93,21 @@ public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IReposi
         return await Task.FromResult(entity).ConfigureAwait(false);
     }
 
+    public virtual async Task<bool> InsertAsync(TEntity[] entity, long? userId = null)
+    {
+        if (entity is IAuditedEntity<TPrimaryKey>[] auditedEntities)
+        {
+            foreach (var auditedEntity in auditedEntities)
+            {
+                auditedEntity.AddedByUserId = userId ?? 0;
+                auditedEntity.AddedDate = DateTime.Now;
+            }
+        }
+
+        GetTable().AddRange(entity);
+        return await Task.FromResult(await GetContext().SaveChangesAsync().ConfigureAwait(false) > 0).ConfigureAwait(false);
+    }
+
     public virtual async Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity, long? userId = null)
     {
         if (entity is IAuditedEntity<TPrimaryKey> auditedEntity)
@@ -104,7 +119,6 @@ public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IReposi
         var result = GetTable().Add(entity);
 
         await GetContext().SaveChangesAsync().ConfigureAwait(false); // Save changes to the database
-
         return await Task.FromResult(result.Entity.Id).ConfigureAwait(false);
     }
 
@@ -139,7 +153,6 @@ public abstract class RepositoryBase<TDbContext, TEntity, TPrimaryKey> : IReposi
     #endregion public methods
 
     #region protected methods
-
     protected virtual void AttachIfNot(TEntity entity)
     {
         if (GetContext().ChangeTracker.Entries().FirstOrDefault(ent => ent.Entity == entity) == null)
